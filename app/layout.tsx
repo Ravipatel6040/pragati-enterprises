@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Pragati Enterprises | Perfumes, Fresheners, Cosmetics & Care Products",
   description:
     "Pragati Enterprises manufactures and supplies perfumes, room fresheners, cosmetics, agarbatti, diffuser oils, car care, spa care, household cleaning and institutional care products.",
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
