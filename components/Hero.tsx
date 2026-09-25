@@ -1,33 +1,32 @@
 import { ArrowRight, MessageCircle, Droplet, Sparkles, Flame } from "lucide-react";
 import Swatch from "./Swatch";
+import { client } from "@/sanity/lib/client";
 
-export default function Hero() {
+export default async function Hero() {
+  const hero = await client.fetch(`*[_type == "heroSection"][0]`);
+  
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="container-x grid gap-14 py-16 md:grid-cols-2 md:items-center md:py-24">
         <div>
           <p className="text-sm tracking-wide text-brass-dark">
-            Manufacturer &amp; Supplier since establishment
+            {hero?.subtitle || "Manufacturer & Supplier since establishment"}
           </p>
           <h1 className="mt-4 font-display text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-[3.4rem]">
-            Fragrance, care and cleaning products, made for every space you
-            look after.
+            {hero?.heading || "Fragrance, care and cleaning products, made for every space you look after."}
           </h1>
           <p className="mt-6 max-w-md text-ink/70">
-            Pragati Enterprises manufactures and supplies perfumes, room
-            fresheners, cosmetics, agarbatti, diffuser oils, car &amp; auto
-            care, spa care, household cleaning and institutional care
-            products — trusted by hotels, hospitals, offices and homes alike.
+            {hero?.description || "Pragati Enterprises manufactures and supplies perfumes, room fresheners, cosmetics, agarbatti, diffuser oils, car & auto care, spa care, household cleaning and institutional care products — trusted by hotels, hospitals, offices and homes alike."}
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
             <a
-              href="/contact"
+              href={hero?.ctaButtonLink || "/contact"}
               className="flex items-center gap-2 rounded-sm bg-plum px-6 py-3.5 text-cream transition-colors hover:bg-plum-dark"
             >
-              Request a Quote <ArrowRight className="h-4 w-4" />
+              {hero?.ctaButtonText || "Request a Quote"} <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="https://wa.me/910000000000"
+              href={`https://wa.me/${hero?.whatsappNumber || "910000000000"}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-sm border border-ink/15 px-6 py-3.5 text-ink transition-colors hover:border-plum hover:text-plum"
@@ -53,20 +52,16 @@ export default function Hero() {
             </a>
           </div>
 
-          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-ink/10 pt-6">
-            <div>
-              <dt className="font-display text-2xl text-ink">10+</dt>
-              <dd className="text-xs text-ink/60">Product categories</dd>
-            </div>
-            <div>
-              <dt className="font-display text-2xl text-ink">6</dt>
-              <dd className="text-xs text-ink/60">Industries served</dd>
-            </div>
-            <div>
-              <dt className="font-display text-2xl text-ink">B2B</dt>
-              <dd className="text-xs text-ink/60">Bulk &amp; custom supply</dd>
-            </div>
-          </dl>
+          {hero?.stats && hero.stats.length > 0 && (
+            <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-ink/10 pt-6">
+              {hero.stats.map((stat: any, idx: number) => (
+                <div key={idx}>
+                  <dt className="font-display text-2xl text-ink">{stat.value}</dt>
+                  <dd className="text-xs text-ink/60">{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
         </div>
 
         <div className="relative">

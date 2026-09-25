@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { X, MessageCircle } from "lucide-react";
 import { RiMenuUnfold4Line } from "react-icons/ri";
 import Image from "next/image";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "All Categories", href: "/products" },
   { label: "Industries", href: "/industries" },
@@ -18,6 +20,7 @@ const navLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -47,15 +50,24 @@ export default function Header() {
           </a>
 
           <nav className="hidden items-center gap-6 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="whitespace-nowrap text-[15px] font-medium text-ink/80 transition-colors hover:text-plum"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`whitespace-nowrap text-[15px] font-medium transition-colors hover:text-plum relative pb-1 ${
+                    isActive
+                      ? "text-plum after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-plum after:rounded-full"
+                      : "text-ink/80"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="hidden shrink-0 items-center lg:flex">
@@ -174,33 +186,48 @@ export default function Header() {
             gap: "4px",
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              style={{
-                display: "block",
-                padding: "12px 16px",
-                borderRadius: "8px",
-                fontSize: "1.05rem",
-                fontWeight: 500,
-                color: "var(--color-ink, #1a1a2e)",
-                textDecoration: "none",
-                transition: "background 0.15s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.background =
-                  "rgba(0,0,0,0.05)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.background =
-                  "transparent")
-              }
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href));
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                style={{
+                  display: "block",
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  fontSize: "1.05rem",
+                  fontWeight: 500,
+                  color: isActive
+                    ? "var(--color-plum, #6B2FA0)"
+                    : "var(--color-ink, #1a1a2e)",
+                  textDecoration: "none",
+                  transition: "background 0.15s, color 0.15s",
+                  background: isActive
+                    ? "rgba(107, 47, 160, 0.08)"
+                    : "transparent",
+                  borderLeft: isActive
+                    ? "3px solid var(--color-plum, #6B2FA0)"
+                    : "3px solid transparent",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive)
+                    (e.currentTarget as HTMLAnchorElement).style.background =
+                      "rgba(0,0,0,0.05)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive)
+                    (e.currentTarget as HTMLAnchorElement).style.background =
+                      "transparent";
+                }}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* WhatsApp CTA at the bottom */}

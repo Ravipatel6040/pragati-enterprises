@@ -4,7 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Swatch from "@/components/Swatch";
-import { categoryData, getCategoryBySlug } from "@/lib/categoryData";
+import { client } from "@/sanity/lib/client";
+import { getIcon } from "@/lib/icons";
 import {
   CheckCircle2,
   ArrowRight,
@@ -13,8 +14,9 @@ import {
 } from "lucide-react";
 
 /* ── Static params for Next.js build ── */
-export function generateStaticParams() {
-  return categoryData.map((c) => ({ slug: c.slug }));
+export async function generateStaticParams() {
+  const categories = await client.fetch(`*[_type == "category"]{ "slug": slug.current }`);
+  return categories.map((c: any) => ({ slug: c.slug }));
 }
 
 /* ── SEO Metadata ── */
@@ -23,21 +25,31 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const cat = getCategoryBySlug(params.slug);
+  const cat = await client.fetch(`*[_type == "category" && slug.current == $slug][0]`, { slug: params.slug });
   if (!cat) return { title: "Not Found" };
   return {
     title: `${cat.name} | Products | Pragati Enterprises`,
-    description: cat.desc,
+    description: cat.description || cat.desc,
   };
 }
 
 /* ── Page ── */
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const cat = getCategoryBySlug(params.slug);
+  const cat = await client.fetch(`
+    *[_type == "category" && slug.current == $slug][0] {
+      ...,
+      "products": *[_type == "product" && references(^._id)] | order(order asc) {
+        name,
+        "image": image.asset->url
+      },
+      "otherCategories": *[_type == "category" && slug.current != $slug] { name, "slug": slug.current }
+    }
+  `, { slug: params.slug });
+  
   if (!cat) notFound();
 
   return (
@@ -58,7 +70,7 @@ export default function CategoryPage({
               Browse the list of available products in this category.
             </p>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {cat.products.map((product, idx) => (
+              {cat.products.map((product: any, idx: number) => (
                 <div
                   key={idx}
                   className="group overflow-hidden rounded-sm border border-ink/10 bg-cream/50 transition-colors hover:border-plum/40 hover:bg-white"
@@ -96,13 +108,13 @@ export default function CategoryPage({
               Common questions.
             </h2>
             <div className="mt-8 space-y-6">
-              {cat.faqs.map((faq) => (
+              {(cat.faqs || []).map((faq: any) => (
                 <div
-                  key={faq.q}
+                  key={faq.question}
                   className="rounded-sm border border-ink/10 bg-white/50 p-6"
                 >
-                  <h3 className="font-display text-base text-ink">{faq.q}</h3>
-                  <p className="mt-2 text-sm text-ink/65">{faq.a}</p>
+                  <h3 className="font-display text-base text-ink">{faq.question}</h3>
+                  <p className="mt-2 text-sm text-ink/65">{faq.answer}</p>
                 </div>
               ))}
             </div>
@@ -147,9 +159,7 @@ export default function CategoryPage({
         <div className="container-x py-16">
           <p className="text-sm text-ink/50">Explore other categories</p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {categoryData
-              .filter((c) => c.slug !== cat.slug)
-              .map((c) => (
+            {(cat.otherCategories || []).map((c: any) => (
                 <a
                   key={c.slug}
                   href={`/products/${c.slug}`}

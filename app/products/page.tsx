@@ -4,7 +4,8 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Swatch from "@/components/Swatch";
-import { categoryData } from "@/lib/categoryData";
+import { client } from "@/sanity/lib/client";
+import { getIcon } from "@/lib/icons";
 import {
   ArrowRight,
   CheckCircle2,
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
 };
 
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const categories = await client.fetch(`*[_type == "category"] | order(order asc)`);
+
   return (
     <main>
       <Header />
@@ -48,14 +51,14 @@ export default function ProductsPage() {
 
       <section className="container-x py-20">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {categoryData.map((cat) => (
+          {categories.map((cat: any) => (
             <a
-              key={cat.slug}
-              href={`/products/${cat.slug}`}
+              key={cat.slug.current}
+              href={`/products/${cat.slug.current}`}
               className="group flex flex-col"
             >
               <div className="relative">
-                <Swatch icon={cat.icon} tone={cat.tone} className="aspect-[4/3]" />
+                <Swatch icon={getIcon(cat.icon)} tone={cat.tone} className="aspect-[4/3]" />
                 {cat.badge && (
                   <span className="absolute top-3 left-3 rounded-sm bg-brass px-3 py-1 text-xs font-medium text-ink">
                     {cat.badge}
@@ -64,9 +67,9 @@ export default function ProductsPage() {
               </div>
               <div className="mt-5 flex flex-1 flex-col">
                 <h2 className="font-display text-xl text-ink group-hover:text-plum transition-colors">{cat.name}</h2>
-                <p className="mt-2 text-sm text-ink/65">{cat.desc}</p>
+                <p className="mt-2 text-sm text-ink/65">{cat.description || cat.desc}</p>
                 <ul className="mt-4 space-y-1.5">
-                  {cat.highlights.map((h) => (
+                  {(cat.highlights || []).map((h: string) => (
                     <li key={h} className="flex items-center gap-2 text-sm text-ink/70">
                       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
                       {h}
