@@ -44,144 +44,48 @@ export default function CategoryPage({
     <main>
       <Header />
 
-      {/* Hero */}
-      <section className="border-b border-ink/10 bg-ink text-cream">
-        <div className="container-x py-16 sm:py-20">
-          <a
-            href="/products"
-            className="mb-6 inline-flex items-center gap-1.5 text-xs text-cream/50 hover:text-brass-light transition-colors"
-          >
-            <ChevronLeft className="h-3.5 w-3.5" />
-            All Products
-          </a>
 
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              {cat.badge && (
-                <span className="inline-block rounded-sm bg-brass px-3 py-1 text-xs font-medium text-ink">
-                  {cat.badge}
-                </span>
-              )}
-              <p className="mt-3 text-sm tracking-wide text-brass-light">
-                Product Category
-              </p>
-              <h1 className="mt-3 font-display text-3xl leading-tight sm:text-4xl lg:text-[2.75rem]">
-                {cat.name}
-              </h1>
-              <p className="mt-4 max-w-lg text-cream/70">{cat.tagline}</p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-sm bg-plum px-5 py-3 text-sm text-cream transition-colors hover:bg-plum-dark"
-                >
-                  Enquire Now
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href={`https://wa.me/910000000000?text=Hi%2C+I+am+interested+in+${encodeURIComponent(cat.name)}+from+Pragati+Enterprises.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-sm border border-cream/20 px-5 py-3 text-sm text-cream transition-colors hover:border-cream/40"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-
-            {/* Visual swatch */}
-            <div className="hidden lg:block">
-              <Swatch icon={cat.icon} tone={cat.tone} className="aspect-[4/3] w-full" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview + Highlights */}
-      <section className="bg-cream">
-        <div className="container-x grid gap-14 py-20 lg:grid-cols-2">
-          <div>
+    {/* Available Products */}
+      {cat.products && cat.products.length > 0 && (
+        <section className="bg-white border-t border-ink/10">
+          <div className="container-x py-20">
             <div className="divider-gold bg-plum" />
             <h2 className="mt-5 font-display text-2xl text-ink sm:text-3xl">
-              About this category.
+              Available Products
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-ink/70">{cat.desc}</p>
-          </div>
-
-          <div>
-            <div className="divider-gold bg-brass" />
-            <h2 className="mt-5 font-display text-2xl text-ink sm:text-3xl">
-              What we offer.
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {cat.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3">
-                  <CheckCircle2
-                    className="mt-0.5 h-4 w-4 shrink-0 text-plum"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-sm text-ink/75">{h}</span>
-                </li>
+            <p className="mt-3 max-w-lg text-sm text-ink/65 mb-10">
+              Browse the list of available products in this category.
+            </p>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {cat.products.map((product, idx) => (
+                <div
+                  key={idx}
+                  className="group overflow-hidden rounded-sm border border-ink/10 bg-cream/50 transition-colors hover:border-plum/40 hover:bg-white"
+                >
+                  {product.image ? (
+                    <div className="aspect-[4/3] w-full relative">
+                      <img src={product.image} alt={product.name} className="object-cover w-full h-full" />
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/3] w-full bg-ink/5 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 opacity-10 [background-image:radial-gradient(circle_at_1px_1px,#161D16_1px,transparent_0)] [background-size:16px_16px]" />
+                      <span className="text-ink/30 text-sm font-medium z-10">Image Coming Soon</span>
+                    </div>
+                  )}
+                  <div className="p-5 border-t border-ink/5">
+                    <h3 className="font-medium text-ink leading-snug">{product.name}</h3>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Use Cases */}
-      <section className="border-t border-b border-ink/10 bg-ink text-cream">
-        <div className="container-x py-20">
-          <div className="h-px w-14 bg-brass" />
-          <h2 className="mt-5 font-display text-2xl text-cream sm:text-3xl">
-            Who buys this.
-          </h2>
-          <p className="mt-3 max-w-lg text-sm text-cream/60">
-            This category serves a wide range of buyers — from retail distributors to
-            institutional buyers.
-          </p>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {cat.useCases.map((uc) => (
-              <div
-                key={uc.title}
-                className="rounded-sm border border-cream/10 p-6 transition-colors hover:border-brass/40"
-              >
-                <h3 className="font-display text-lg text-brass-light">
-                  {uc.title}
-                </h3>
-                <p className="mt-2 text-sm text-cream/65">{uc.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Supply Options */}
-      <section className="bg-cream border-b border-ink/10">
-        <div className="container-x py-20">
-          <div className="divider-gold bg-plum" />
-          <h2 className="mt-5 font-display text-2xl text-ink sm:text-3xl">
-            How we supply.
-          </h2>
-          <p className="mt-3 max-w-lg text-sm text-ink/65">
-            We supply direct from our manufacturing facility with no middlemen — better
-            pricing, faster response.
-          </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {cat.supplyOptions.map((opt) => (
-              <div
-                key={opt}
-                className="flex items-center gap-4 rounded-sm border border-ink/10 bg-white/50 px-6 py-4"
-              >
-                <span className="h-2 w-2 shrink-0 rounded-full bg-plum" />
-                <span className="text-sm text-ink/80">{opt}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* FAQs */}
       <section className="bg-cream">

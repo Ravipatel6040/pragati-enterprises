@@ -10,7 +10,7 @@ const products = [
 
 export default function Featured() {
   return (
-    <section className="bg-cream">
+    <section className="bg-plum/5">
       <div className="container-x py-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-lg">

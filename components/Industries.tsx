@@ -11,8 +11,9 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section id="industries" className="container-x py-20">
-      <div className="max-w-lg">
+    <section id="industries" className="bg-ink/5 py-20">
+      <div className="container-x">
+        <div className="max-w-lg">
         <div className="divider-gold bg-plum" />
         <h2 className="mt-5 font-display text-3xl text-ink sm:text-4xl">
           Industries we serve.
@@ -33,6 +34,7 @@ export default function Industries() {
             <span className="text-sm text-ink/80">{ind.name}</span>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

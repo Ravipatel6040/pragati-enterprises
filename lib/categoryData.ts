@@ -9,6 +9,10 @@ import {
   Waves,
   SprayCan,
   Building2,
+  Zap,
+  Flower2,
+  Utensils,
+  Shield
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
@@ -26,63 +30,100 @@ export interface CategoryData {
   useCases: { title: string; body: string }[];
   supplyOptions: string[];
   faqs: { q: string; a: string }[];
+  products?: { name: string; image?: string }[];
 }
 
 export const categoryData: CategoryData[] = [
   {
-    slug: "perfumes-room-fresheners",
-    name: "Perfumes & Room Fresheners",
-    icon: Droplet,
-    tone: "plum",
-    badge: "Most Popular",
-    tagline: "Long-lasting fragrance for every space and every occasion.",
-    desc: "From personal perfumes and colognes to home and room freshener sprays, this is our most sought-after category. Every formulation is crafted in-house using quality fragrance compounds — available in standard and custom scent profiles for retail, bulk and private-label supply.",
+    slug: "agarbatti-perfume",
+    name: "Agarbatti Perfume",
+    icon: Flame,
+    tone: "sage",
+    tagline: "Premium fragrance compounds for agarbatti manufacturing.",
+    desc: "We supply a wide range of premium fragrance compounds specifically formulated for agarbatti and dhoop manufacturing. Our compounds ensure excellent fragrance retention, strong throw, and consistent burning characteristics.",
     highlights: [
-      "Eau de Parfum & Cologne",
-      "Room Spray & Linen Spray",
-      "Pocket & Travel Sizes",
-      "Long-lasting Fragrance Compounds",
-      "Custom Fragrance Blending",
-      "Retail & Bulk Pack Sizes",
+      "Consistent batch-to-batch quality",
+      "High fragrance retention",
+      "Wide variety of traditional and modern scents",
+      "Custom formulations available",
+      "Bulk packaging for manufacturers",
+    ],
+    useCases: [
+      {
+        title: "Agarbatti Manufacturers",
+        body: "High-quality fragrance compounds for consistent and premium agarbatti production.",
+      },
+      {
+        title: "Dhoop and Cone Manufacturers",
+        body: "Formulations optimized for dhoop sticks and cones, ensuring a steady and aromatic burn.",
+      },
+    ],
+    supplyOptions: [
+      "Bulk containers (5kg, 10kg, 25kg, 50kg)",
+      "Custom fragrance blending",
+    ],
+    faqs: [
+      {
+        q: "Do you offer custom fragrances?",
+        a: "Yes, we can develop custom fragrance profiles based on your specific requirements.",
+      },
+      {
+        q: "What is the minimum order quantity?",
+        a: "Please contact us for MOQ details as it varies by product and packaging size.",
+      },
+    ],
+    products: [
+      { name: "Rose Agarbatti Perfume" },
+      { name: "Lilly Agarbatti Perfume" },
+      { name: "Jasmine Agarbatti Perfume" },
+      { name: "Rose Gold Agarbatti Perfume" },
+      { name: "Mogra Agarbatti Perfume" },
+      { name: "Lemon Grass Agarbatti Perfume" },
+      { name: "Sandalwood Agarbatti Perfume" },
+      { name: "Strawberry Agarbatti Perfume" },
+      { name: "Kacha Nimbu Agarbatti Perfume" },
+      { name: "Agarbatti Perfume" }
+    ]
+  },
+  {
+    slug: "perfume-spray",
+    name: "Perfume Spray",
+    icon: SprayCan,
+    tone: "plum",
+    tagline: "High-quality perfume sprays for everyday freshness.",
+    desc: "Our perfume spray range is crafted with premium fragrance compounds, providing long-lasting scent and freshness. We also supply packaging components like mist sprayers for brands.",
+    highlights: [
+      "Deodorant & Body Sprays",
+      "Long-lasting fragrance",
+      "Mist Sprayer Components",
+      "Bulk and Retail Packaging",
+      "Custom formulations available"
+    ],
+    products: [
+      { name: "Deodorant Perfume Spray" },
+      { name: "White Plastic 19 Mm Mist Sprayers" }
     ],
     useCases: [
       {
         title: "Retail & Distribution",
-        body: "Perfumes and room fresheners are among the fastest-moving FMCG categories. We supply distributors with consistently packaged, well-fragranced products ready for shelf.",
-      },
-      {
-        title: "Hospitality & Hotels",
-        body: "Room freshener sprays and linen sprays for hotels, guesthouses and serviced apartments. Signature scents available on request.",
+        body: "Fast-moving everyday products packaged for retail shelves.",
       },
       {
         title: "Private Label",
-        body: "Launch your own perfume or room freshener brand with our white-label and private-label service — your bottle, your label, our formulation.",
-      },
-      {
-        title: "Gift & Corporate",
-        body: "Curated fragrance sets and gift packs for corporate gifting, event favours and festive gifting programs.",
-      },
+        body: "Launch your own perfume spray brand with our private-label services.",
+      }
     ],
     supplyOptions: [
       "Retail-ready packaged units",
       "Bulk supply for dealers & distributors",
-      "Private label with custom label & bottle",
-      "Custom fragrance on request (MOQ applies)",
+      "Private label with custom label & bottle"
     ],
     faqs: [
       {
-        q: "What fragrance options are available?",
-        a: "We carry a wide range of fragrance profiles — floral, woody, musky, fresh and oriental. Custom fragrance blending is available with a minimum order quantity.",
-      },
-      {
-        q: "Can I get my own brand label on the bottles?",
-        a: "Yes. Private-label and white-label options are available. Share your design artwork and we'll handle printing and application.",
-      },
-      {
-        q: "What is the minimum order quantity?",
-        a: "MOQ is typically 500 units per SKU for packaged perfumes. Room freshener MOQs start from 300 units. Exact quantities shared at enquiry.",
-      },
-    ],
+        q: "What packaging options are available?",
+        a: "We provide various mist sprayers and aerosol cans. Private labeling is also available.",
+      }
+    ]
   },
   {
     slug: "cosmetics",
@@ -248,8 +289,8 @@ export const categoryData: CategoryData[] = [
     ],
   },
   {
-    slug: "air-fresheners",
-    name: "Air Fresheners",
+    slug: "air-freshener",
+    name: "Air Freshener",
     icon: Wind,
     tone: "brass",
     tagline: "Long-lasting freshness for homes, offices and vehicles.",
@@ -261,6 +302,13 @@ export const categoryData: CategoryData[] = [
       "Multiple Scent Variants",
       "Retail & Bulk Pack Sizes",
       "Custom Scent Available",
+    ],
+    products: [
+      { name: "Cool Air Freshener" },
+      { name: "Air Freshener" },
+      { name: "Splash Aroma Air Freshener" },
+      { name: "Splash Aroma Air Freshener" },
+      { name: "Rose Air Freshener" }
     ],
     useCases: [
       {
@@ -302,8 +350,8 @@ export const categoryData: CategoryData[] = [
     ],
   },
   {
-    slug: "diffuser-oil",
-    name: "Diffuser Oil",
+    slug: "diffuser-oil-and-electric-diffuser",
+    name: "Diffuser Oil And Electric Diffuser",
     icon: Leaf,
     tone: "plum",
     tagline: "Signature fragrance oils for reed and electric diffusers.",
@@ -315,6 +363,12 @@ export const categoryData: CategoryData[] = [
       "Custom Scent Blending",
       "Private Label Labelling",
       "Bulk Supply Available",
+    ],
+    products: [
+      { name: "Diffuser Oil" },
+      { name: "Lemon Grass Diffuser Oil" },
+      { name: "Real Rose Aroma Oil" },
+      { name: "Lavender Aroma oil" }
     ],
     useCases: [
       {
@@ -356,8 +410,8 @@ export const categoryData: CategoryData[] = [
     ],
   },
   {
-    slug: "car-auto-care",
-    name: "Car & Auto Care Products",
+    slug: "automobile-polish",
+    name: "Automobile Polish",
     icon: CarFront,
     tone: "sage",
     tagline: "Professional-grade formulations for automotive care.",
@@ -369,6 +423,12 @@ export const categoryData: CategoryData[] = [
       "Car Air Freshener Range",
       "Dashboard Care Products",
       "Bulk Supply for Dealers",
+    ],
+    products: [
+      { name: "Shield Miraplate Liquid Car Polish" },
+      { name: "Tyre Polish" },
+      { name: "Interior Polish" },
+      { name: "Dashboard Polish" }
     ],
     useCases: [
       {
@@ -410,8 +470,51 @@ export const categoryData: CategoryData[] = [
     ],
   },
   {
-    slug: "spa-care",
-    name: "Spa Care Products",
+    slug: "sanitizer",
+    name: "Sanitizer",
+    icon: Droplet,
+    tone: "plum",
+    tagline: "High-quality, effective sanitizers for personal and commercial use.",
+    desc: "We manufacture premium hand and surface sanitizers designed to effectively eliminate germs while remaining gentle on the skin. Suitable for hospitals, corporate offices, and everyday personal use.",
+    highlights: [
+      "Kills 99.9% of germs",
+      "Gentle on skin",
+      "Available in liquid and gel formats",
+      "Bulk supply for commercial spaces",
+      "Hospital-grade formulations available"
+    ],
+    products: [
+      { name: "Hand Sanitizer" }
+    ],
+    useCases: [
+      {
+        title: "Hospitals & Clinics",
+        body: "Reliable sanitization solutions meeting strict hygiene requirements.",
+      },
+      {
+        title: "Corporate Offices",
+        body: "Bulk sanitizer supply for office entryways, desks, and common areas.",
+      },
+      {
+        title: "Retail Distribution",
+        body: "Retail-ready sanitizer bottles in various sizes for general consumers.",
+      }
+    ],
+    supplyOptions: [
+      "Retail units (50ml - 500ml)",
+      "Bulk refill cans (5L, 20L)",
+      "Private labeling available"
+    ],
+    faqs: [
+      {
+        q: "Are the sanitizers alcohol-based?",
+        a: "Yes, our standard sanitizers contain the recommended percentage of alcohol for effective germ protection. We also have alcohol-free options on request.",
+      }
+    ]
+  },
+  {
+    slug: "spa-massage-oil",
+    name: "Spa Massage Oil",
     icon: Waves,
     tone: "ink",
     tagline: "Aromatherapy and spa-grade care for wellness businesses.",
@@ -423,6 +526,9 @@ export const categoryData: CategoryData[] = [
       "Relaxation & Therapeutic Blends",
       "Hotel & Resort Amenities",
       "Custom Branding Available",
+    ],
+    products: [
+      { name: "Spa Massage Oil" }
     ],
     useCases: [
       {
@@ -464,8 +570,8 @@ export const categoryData: CategoryData[] = [
     ],
   },
   {
-    slug: "household-cleaning",
-    name: "Household Cleaning Products",
+    slug: "floor-cleaner",
+    name: "Floor Cleaner",
     icon: SprayCan,
     tone: "brass",
     tagline: "Effective everyday cleaning for homes and general trade.",
@@ -477,6 +583,10 @@ export const categoryData: CategoryData[] = [
       "Fragrance-Added Options",
       "Retail & Bulk Pack Sizes",
       "Custom Fragrance Variants",
+    ],
+    products: [
+      { name: "Floor Phenyl Cleaner" },
+      { name: "Floor Cleaner" }
     ],
     useCases: [
       {
@@ -572,6 +682,192 @@ export const categoryData: CategoryData[] = [
       },
     ],
   },
+  {
+    slug: "shower-gel",
+    name: "Shower Gel",
+    icon: Droplet,
+    tone: "plum",
+    tagline: "Luxurious shower gels for a refreshing bathing experience.",
+    desc: "Our shower gels are formulated to cleanse gently while leaving a lingering, refreshing fragrance on the skin. Ideal for retail, hospitality amenities, and private label.",
+    highlights: [
+      "Rich lather and gentle cleansing",
+      "Infused with premium fragrances",
+      "Suitable for all skin types",
+      "Available in bulk and retail sizes",
+      "Hotel amenity packaging available"
+    ],
+    products: [
+      { name: "Shower Gel" }
+    ],
+    useCases: [
+      {
+        title: "Hospitality & Hotels",
+        body: "Premium bathroom amenities for guest rooms.",
+      },
+      {
+        title: "Retail Distribution",
+        body: "Attractive retail-ready bottles for supermarkets and beauty stores.",
+      },
+      {
+        title: "Private Label",
+        body: "Launch your own line of body care with our private labeling services.",
+      }
+    ],
+    supplyOptions: [
+      "Retail units (200ml - 500ml)",
+      "Bulk supply (5L, 20L) for refills",
+      "Hotel amenity sizes (30ml - 50ml)"
+    ],
+    faqs: [
+      {
+        q: "Do you offer custom fragrances for shower gels?",
+        a: "Yes, we can develop custom fragrance profiles for bulk and private label orders.",
+      }
+    ]
+  },
+  {
+    slug: "car-shampoo",
+    name: "Car Shampoo",
+    icon: CarFront,
+    tone: "sage",
+    tagline: "Premium car shampoo for a spotless finish.",
+    desc: "Our car shampoo is formulated to gently lift dirt and grime without damaging the paint. Ideal for auto detailing and everyday washing.",
+    highlights: ["Gentle on paint", "High foaming", "Bulk packaging"],
+    products: [{ name: "Car Shampoo" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "car-wash-liquid",
+    name: "Car Wash Liquid",
+    icon: Droplet,
+    tone: "sage",
+    tagline: "Effective car wash liquids for professional use.",
+    desc: "High-concentration car wash liquids designed for automated car washes and detailing centers.",
+    highlights: ["Concentrated formula", "Leaves a shiny finish", "Bulk packaging"],
+    products: [{ name: "Car Wash Liquid" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "electric-diffuser",
+    name: "Electric Diffuser",
+    icon: Zap,
+    tone: "plum",
+    tagline: "Modern electric diffusers for continuous fragrance.",
+    desc: "Reliable electric diffusers perfect for homes, offices, and hospitality environments.",
+    highlights: ["Continuous operation", "Elegant design", "Wholesale available"],
+    products: [{ name: "Electric Diffuser" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "liquid-handwash",
+    name: "Liquid Handwash",
+    icon: Droplet,
+    tone: "plum",
+    tagline: "Gentle and effective liquid handwash.",
+    desc: "Our liquid handwash cleans hands effectively while leaving them feeling soft and refreshed.",
+    highlights: ["Moisturizing formula", "Multiple fragrances", "Bulk sizes available"],
+    products: [{ name: "Liquid Handwash" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "toilet-cleaner",
+    name: "Toilet Cleaner",
+    icon: Sparkles,
+    tone: "brass",
+    tagline: "Powerful toilet cleaning solutions.",
+    desc: "Formulated to remove tough stains and provide long-lasting hygiene for commercial and residential use.",
+    highlights: ["Stain removal", "Kills germs", "Institutional bulk supply"],
+    products: [{ name: "Toilet Cleaner" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "aroma-diffuser-set",
+    name: "Aroma Diffuser set",
+    icon: Flower2,
+    tone: "plum",
+    tagline: "Complete aroma diffuser sets for home and office.",
+    desc: "Beautifully packaged aroma diffuser sets, perfect for retail and corporate gifting.",
+    highlights: ["Complete set", "Premium packaging", "Customizable fragrances"],
+    products: [{ name: "Aroma Diffuser set" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "dishwash-cleaner",
+    name: "Dishwash Cleaner",
+    icon: Utensils,
+    tone: "brass",
+    tagline: "Tough on grease, gentle on hands.",
+    desc: "Our dishwash cleaners effectively cut through grease and grime, leaving dishes sparkling clean.",
+    highlights: ["Grease cutting", "Skin friendly", "Available in liquid and gel"],
+    products: [{ name: "Dishwash Cleaner" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "room-freshener",
+    name: "Room Freshener",
+    icon: Wind,
+    tone: "brass",
+    tagline: "Instantly refresh any room.",
+    desc: "Long-lasting room fresheners available in a variety of pleasant fragrances.",
+    highlights: ["Instant freshness", "Long-lasting", "Wide variety of scents"],
+    products: [{ name: "Room Freshener" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "glass-cleaner",
+    name: "Glass Cleaner",
+    icon: Sparkles,
+    tone: "brass",
+    tagline: "Streak-free glass cleaning solutions.",
+    desc: "Formulated for streak-free cleaning of glass, mirrors, and other smooth surfaces.",
+    highlights: ["Streak-free shine", "Fast drying", "Bulk packaging"],
+    products: [{ name: "Glass Cleaner" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "branded-perfume",
+    name: "Branded Perfume",
+    icon: FlaskConical,
+    tone: "plum",
+    tagline: "Premium branded perfumes.",
+    desc: "High-quality perfumes crafted with exquisite fragrance profiles.",
+    highlights: ["Long-lasting", "Premium packaging", "Wide variety of notes"],
+    products: [{ name: "Branded Perfume" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  },
+  {
+    slug: "massage-cream",
+    name: "Massage Cream",
+    icon: Waves,
+    tone: "ink",
+    tagline: "Luxurious massage creams for spas.",
+    desc: "Formulated to provide the perfect glide for professional massage therapies.",
+    highlights: ["Smooth glide", "Moisturizing", "Professional grade"],
+    products: [{ name: "Massage Cream" }],
+    useCases: [],
+    supplyOptions: [],
+    faqs: []
+  }
 ];
 
 export function getCategoryBySlug(slug: string): CategoryData | undefined {

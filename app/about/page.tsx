@@ -4,6 +4,7 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Swatch from "@/components/Swatch";
+import StatsBar from "@/components/StatsBar";
 import {
   Factory,
   Target,
@@ -139,16 +140,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Bar */}
-      <section className="bg-plum text-cream">
-        <div className="container-x grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-plum px-8 py-10">
-              <p className="font-display text-4xl text-brass-light">{s.value}</p>
-              <p className="mt-2 text-sm text-cream/70">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StatsBar />
 
       {/* Mission / Vision / Commitment */}
       <section className="bg-ink text-cream">
@@ -186,32 +178,7 @@ export default function AboutPage() {
         </ol>
       </section>
 
-      {/* Business Capabilities */}
-      <section className="bg-cream border-t border-ink/10">
-        <div className="container-x py-20">
-          <div className="max-w-lg">
-            <div className="divider-gold bg-plum" />
-            <h2 className="mt-5 font-display text-3xl text-ink sm:text-4xl">
-              Business capabilities.
-            </h2>
-            <p className="mt-4 text-ink/65">
-              Everything you need from a manufacturing partner — under one roof,
-              available for enquiry today.
-            </p>
-          </div>
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilities.map((cap, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-4 rounded-sm border border-ink/10 p-5"
-              >
-                <cap.icon className="mt-0.5 h-5 w-5 shrink-0 text-plum" strokeWidth={1.4} />
-                <span className="text-sm text-ink/75">{cap.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+
 
 
       {/* Industries We Serve */}

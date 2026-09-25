@@ -2,7 +2,7 @@ import { Store, Package, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function B2BPromo() {
   return (
-    <section className="border-t border-ink/10 bg-cream">
+    <section className="border-t border-ink/10 bg-brass/10">
       <div className="container-x py-20">
         {/* Section header */}
         <div className="max-w-lg">

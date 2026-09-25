@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { X, MessageCircle } from "lucide-react";
 import { RiMenuUnfold4Line } from "react-icons/ri";
+import Image from "next/image";
 
 const navLinks = [
   { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
+  { label: "All Categories", href: "/products" },
   { label: "Industries", href: "/industries" },
   { label: "Quality", href: "/quality" },
   { label: "Dealership", href: "/dealership" },
@@ -33,22 +34,24 @@ export default function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur">
-        <div className="container-x flex h-16 items-center justify-between gap-4">
-          <a href="/" className="flex flex-col leading-none">
-            <span className="font-display text-xl tracking-tight text-ink">
-              Pragati Enterprises
-            </span>
-            <span className="mt-1 text-[11px] text-ink/60">
-              Fragrance, Care &amp; Cleaning Manufacturing
-            </span>
+        <div className="container-x flex h-20 items-center justify-between gap-4 lg:h-24">
+          <a href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Pragati Enterprises"
+              width={340}
+              height={120}
+              className="h-14 w-auto object-contain scale-[1.35] origin-left lg:h-20"
+              priority
+            />
           </a>
 
-          <nav className="hidden items-center gap-5 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="whitespace-nowrap text-xs font-medium text-ink/70 transition-colors hover:text-plum"
+                className="whitespace-nowrap text-[15px] font-medium text-ink/80 transition-colors hover:text-plum"
               >
                 {link.label}
               </a>
@@ -60,9 +63,9 @@ export default function Header() {
               href="https://wa.me/910000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-sm bg-plum px-4 py-2 text-xs text-cream transition-colors hover:bg-plum-dark"
+              className="flex items-center gap-2 rounded-md bg-plum px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-plum-dark shadow-sm"
             >
-              <MessageCircle className="h-3.5 w-3.5" />
+              <MessageCircle className="h-4 w-4" />
               WhatsApp
             </a>
           </div>
@@ -70,10 +73,10 @@ export default function Header() {
           {/* Hamburger button – shown below lg breakpoint */}
           <button
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
-            className="text-ink lg:hidden"
+            onClick={() => setOpen(true)}
+            className="relative z-50 -mr-2 p-2 text-ink lg:hidden"
           >
-            <RiMenuUnfold4Line className="h-6 w-6" />
+            <RiMenuUnfold4Line className="h-7 w-7" />
           </button>
         </div>
       </header>
@@ -83,7 +86,7 @@ export default function Header() {
       {/* Backdrop overlay */}
       <div
         onClick={() => setOpen(false)}
-        className="md:hidden"
+        className="lg:hidden"
         style={{
           position: "fixed",
           inset: 0,
@@ -99,7 +102,7 @@ export default function Header() {
 
       {/* Drawer panel */}
       <aside
-        className="md:hidden"
+        className="lg:hidden"
         style={{
           position: "fixed",
           top: 0,
@@ -110,7 +113,7 @@ export default function Header() {
           maxWidth: "320px",
           display: "flex",
           flexDirection: "column",
-          background: "var(--color-cream, #fdf8f2)",
+          background: "var(--color-cream, #FFFFFF)",
           boxShadow: "4px 0 24px rgba(0,0,0,0.15)",
           transform: open ? "translateX(0)" : "translateX(-100%)",
           transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -130,27 +133,16 @@ export default function Header() {
           <a
             href="/"
             onClick={() => setOpen(false)}
-            style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}
+            style={{ display: "flex", alignItems: "center" }}
           >
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "1rem",
-                letterSpacing: "-0.02em",
-                color: "var(--color-ink, #1a1a2e)",
-              }}
-            >
-              Pragati Enterprises
-            </span>
-            <span
-              style={{
-                marginTop: "4px",
-                fontSize: "10px",
-                color: "rgba(26,26,46,0.55)",
-              }}
-            >
-              Fragrance, Care &amp; Cleaning Manufacturing
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Pragati Enterprises"
+              width={280}
+              height={100}
+              style={{ height: "64px", width: "auto", objectFit: "contain", transform: "scale(1.2)", transformOrigin: "left center" }}
+              priority
+            />
           </a>
 
           <button
@@ -191,7 +183,7 @@ export default function Header() {
                 display: "block",
                 padding: "12px 16px",
                 borderRadius: "8px",
-                fontSize: "0.95rem",
+                fontSize: "1.05rem",
                 fontWeight: 500,
                 color: "var(--color-ink, #1a1a2e)",
                 textDecoration: "none",
@@ -225,7 +217,7 @@ export default function Header() {
               gap: "8px",
               padding: "14px 20px",
               borderRadius: "8px",
-              background: "var(--color-plum, #6b21a8)",
+              background: "var(--color-plum, #2CA138)",
               color: "#fff",
               fontSize: "0.875rem",
               fontWeight: 600,

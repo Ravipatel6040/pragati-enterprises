@@ -6,7 +6,8 @@ import WhyUs from "@/components/WhyUs";
 import B2BPromo from "@/components/B2BPromo";
 import Industries from "@/components/Industries";
 import Featured from "@/components/Featured";
-import Gallery from "@/components/Gallery";
+import StatsBar from "@/components/StatsBar";
+
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -22,7 +23,8 @@ export default function Home() {
       <B2BPromo />
       <Industries />
       <Featured />
-      <Gallery />
+      <StatsBar />
+
       <CTA />
       <Footer />
       <WhatsAppFloat />
